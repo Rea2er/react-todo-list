@@ -9,9 +9,13 @@ function* todoSagas() {
 }
 
 function* getInitList() {
-  const res = yield axios.get("https://jsonplaceholder.typicode.com/todos/1");
-  const action = initListAction(res.data);
-  yield put(action);
+  try {
+    const res = yield axios.get("https://jsonplaceholder.typicode.com/todos/1");
+    const action = initListAction(res.data);
+    yield put(action);
+  } catch (e) {
+    console.log(e.message);
+  }
 }
 
 export default todoSagas;
